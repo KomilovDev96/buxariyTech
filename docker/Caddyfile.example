@@ -1,0 +1,15 @@
+# Replace example.com; keep API private except through this proxy.
+www.example.com {
+  encode zstd gzip
+  reverse_proxy web:3100
+}
+admin.example.com {
+  encode zstd gzip
+  reverse_proxy admin:80
+}
+api.example.com {
+  request_body { max_size 9MB }
+  reverse_proxy api:4100 {
+    transport http { response_header_timeout 30s }
+  }
+}

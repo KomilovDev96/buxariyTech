@@ -1,0 +1,7 @@
+node_modules
+.local
+.next
+dist
+package-lock.json
+graphify-out
+docs/product-brief.md

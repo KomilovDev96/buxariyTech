@@ -1,0 +1,208 @@
+generator client {
+  provider = "prisma-client-js"
+}
+datasource db {
+  provider = "postgresql"
+  url = env("DATABASE_URL")
+}
+enum Role {
+  ADMIN
+  EDITOR
+}
+enum RequestStatus {
+  NEW
+  REVIEWING
+  CONTACTED
+  DISCUSSION
+  PROPOSAL
+  NEGOTIATION
+  WON
+  REJECTED
+}
+enum Priority {
+  LOW
+  NORMAL
+  HIGH
+  URGENT
+}
+model User {
+  id String @id @default(cuid())
+  email String @unique
+  name String
+  passwordHash String
+  role Role @default(EDITOR)
+  active Boolean @default(true)
+  createdAt DateTime @default(now())
+  sessions Session[]
+  assignedRequests ClientRequest[]
+  notes RequestNote[]
+  auditLogs AuditLog[]
+}
+model Session {
+  id String @id @default(cuid())
+  userId String
+  user User @relation(fields:[userId], references:[id], onDelete:Cascade)
+  refreshHash String @unique
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  @@index([userId])
+}
+model Category {
+  id String @id @default(cuid())
+  name String
+  slug String @unique
+  projects Project[]
+}
+model Technology {
+  id String @id @default(cuid())
+  name String
+  slug String @unique
+  projects Project[]
+}
+model Project {
+  id String @id @default(cuid())
+  title String
+  slug String @unique
+  shortDescription String
+  description String
+  goal String @default("")
+  businessContext String @default("")
+  aiContribution String @default("")
+  challenge String @default("")
+  solution String @default("")
+  result String @default("")
+  categoryId String?
+  category Category? @relation(fields:[categoryId],references:[id],onDelete:SetNull)
+  technologies Technology[]
+  client String @default("")
+  year Int
+  concept Boolean @default(true)
+  featured Boolean @default(false)
+  published Boolean @default(false)
+  images ProjectImage[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@index([published,featured,createdAt])
+}
+model ProjectImage {
+  id String @id @default(cuid())
+  projectId String
+  project Project @relation(fields:[projectId],references:[id],onDelete:Cascade)
+  key String @unique
+  url String
+  alt String
+  sortOrder Int
+  isCover Boolean @default(false)
+  createdAt DateTime @default(now())
+  @@index([projectId,sortOrder])
+}
+model Service {
+  id String @id @default(cuid())
+  title String
+  slug String @unique
+  description String
+  body String
+  icon String @default("code")
+  order Int @default(0)
+  published Boolean @default(false)
+}
+model TeamMember {
+  id String @id @default(cuid())
+  name String
+  position String
+  photo String @default("")
+  bio String @default("")
+  skills String[]
+  linkedin String @default("")
+  telegram String @default("")
+  order Int @default(0)
+  published Boolean @default(false)
+}
+model PrivacyPolicy {
+  version String @id
+  title String
+  content String
+  active Boolean @default(false)
+  createdAt DateTime @default(now())
+  requests ClientRequest[]
+}
+model ClientRequest {
+  id String @id @default(cuid())
+  name String
+  phone String
+  telegram String @default("")
+  company String @default("")
+  service String
+  budget String @default("")
+  description String
+  status RequestStatus @default(NEW)
+  priority Priority @default(NORMAL)
+  assignedToId String?
+  assignedTo User? @relation(fields:[assignedToId],references:[id],onDelete:SetNull)
+  consentGiven Boolean
+  consentAt DateTime
+  privacyPolicyVersion String
+  privacyPolicy PrivacyPolicy @relation(fields:[privacyPolicyVersion],references:[version])
+  notes RequestNote[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@index([status,createdAt])
+  @@index([assignedToId])
+}
+model RequestNote {
+  id String @id @default(cuid())
+  requestId String
+  request ClientRequest @relation(fields:[requestId],references:[id],onDelete:Cascade)
+  authorId String
+  author User @relation(fields:[authorId],references:[id])
+  body String
+  createdAt DateTime @default(now())
+}
+model Setting {
+  key String @id
+  value String
+  public Boolean @default(false)
+}
+model AuditLog {
+  id String @id @default(cuid())
+  userId String?
+  user User? @relation(fields:[userId],references:[id],onDelete:SetNull)
+  action String
+  entity String
+  entityId String?
+  createdAt DateTime @default(now())
+  @@index([createdAt])
+}
+
+model SiteBlock {
+  key String
+  locale String
+  title String @default("")
+  body String @default("")
+  label String @default("")
+  imageAlt String @default("")
+  imageUrl String @default("")
+  imageKey String @default("")
+  updatedAt DateTime @updatedAt
+  @@id([key, locale])
+}
+
+model BusinessSolution {
+  id String @id @default(cuid())
+  title String
+  slug String
+  locale String
+  sector String
+  description String
+  audience String
+  features String[]
+  workflow String[]
+  outcome String @default("")
+  priceLabel String @default("")
+  readiness String @default("CONCEPT")
+  featured Boolean @default(false)
+  order Int @default(0)
+  published Boolean @default(false)
+  @@unique([slug, locale])
+  @@index([published, locale, order])
+}

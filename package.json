@@ -1,0 +1,55 @@
+{
+  "name": "buhariy-tech",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "typecheck": "turbo run typecheck",
+    "test": "vitest run",
+    "test:api": "npm run build --workspace=@buhariy/contracts && npm run build --workspace=@buhariy/api && vitest run --config vitest.integration.config.ts",
+    "db:generate": "prisma generate",
+    "db:migrate": "prisma migrate deploy",
+    "db:seed": "tsx prisma/seed.ts",
+    "infra:up": "docker compose up -d --wait",
+    "infra:down": "docker compose down",
+    "setup:local": "node scripts/setup-local.mjs",
+    "check": "npm run typecheck && npm test",
+    "storage:init": "tsx scripts/storage-init.ts",
+    "format": "prettier --write apps packages prisma tests scripts docs README.md *.json *.yml",
+    "test:browser": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.56.0",
+    "@types/node": "^24.0.0",
+    "prettier": "^3.6.0",
+    "prisma": "6.19.3",
+    "tsx": "^4.20.0",
+    "turbo": "^2.5.0",
+    "typescript": "^5.9.0",
+    "vite": "7.3.6",
+    "vitest": "^4.1.11"
+  },
+  "dependencies": {
+    "@prisma/client": "6.19.3",
+    "argon2": "^0.44.0",
+    "dotenv": "^17.0.0",
+    "zod": "^4.1.0"
+  },
+  "engines": {
+    "node": ">=22.12"
+  },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
+  },
+  "overrides": {
+    "multer": "2.3.0",
+    "sharp": "^0.35.4",
+    "deepmerge-ts": "^8.0.0"
+  },
+  "version": "1.0.0",
+  "packageManager": "npm@11.12.1"
+}

@@ -1,0 +1,25 @@
+{$WEB_DOMAIN} {
+  encode zstd gzip
+  reverse_proxy web:3100
+}
+
+{$ADMIN_DOMAIN} {
+  encode zstd gzip
+  reverse_proxy admin:80
+}
+
+{$API_DOMAIN} {
+  request_body {
+    max_size 9MB
+  }
+  reverse_proxy api:4100 {
+    transport http {
+      response_header_timeout 30s
+    }
+  }
+}
+
+{$MEDIA_DOMAIN} {
+  encode gzip
+  reverse_proxy minio:9000
+}
