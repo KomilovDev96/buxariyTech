@@ -1,4 +1,4 @@
-{$WEB_DOMAIN} {
+{$WEB_DOMAIN}, www.{$WEB_DOMAIN} {
   encode zstd gzip
   reverse_proxy web:3100
 }
