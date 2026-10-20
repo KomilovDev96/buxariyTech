@@ -18,13 +18,16 @@ export async function SolutionsSection() {
             <p className="section-description">{block.body}</p>
           </div>
           {block.imageUrl && (
-            <Image
-              src={block.imageUrl}
-              alt={block.imageAlt}
-              width={800}
-              height={500}
-              sizes="(max-width:768px) 90vw, 35vw"
-            />
+            <div className="solutions-heading-media">
+              <Image
+                src={block.imageUrl}
+                alt={block.imageAlt}
+                width={800}
+                height={500}
+                sizes="(max-width:768px) 90vw, 35vw"
+              />
+              <span>BUKHARA → FUTURE</span>
+            </div>
           )}
         </div>
         <BusinessSolutions items={items} locale={locale} />
