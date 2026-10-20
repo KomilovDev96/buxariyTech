@@ -1110,6 +1110,13 @@ tr:last-child td {
     0 0 92px rgba(139, 111, 71, 0.22);
   filter: saturate(1.12) brightness(1.18) contrast(1.04);
 }
+.solutions-image-preview {
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-position: 50% 50%;
+  border: 1px solid #34352b;
+  background: #171915;
+}
 @media (max-width: 900px) {
   .block-grid {
     grid-template-columns: 1fr;
