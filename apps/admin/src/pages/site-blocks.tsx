@@ -133,7 +133,7 @@ function BlockEditor({ block }: { block: SiteBlock }) {
         <div>
           {src && (
             <img
-              className="block-image-preview"
+              className={`block-image-preview ${block.key === 'hero' ? 'hero-image-preview' : ''}`}
               src={src}
               alt={values.imageAlt || names[block.key]}
             />
