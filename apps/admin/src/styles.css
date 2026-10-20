@@ -1098,6 +1098,18 @@ tr:last-child td {
   object-fit: cover;
   border-radius: 8px;
 }
+.hero-image-preview {
+  height: auto;
+  aspect-ratio: 0.82;
+  object-position: 50% 35%;
+  border: 1px solid #72604a;
+  border-radius: 48% 48% 0 0;
+  background: #131211;
+  box-shadow:
+    0 0 34px rgba(212, 175, 124, 0.42),
+    0 0 92px rgba(139, 111, 71, 0.22);
+  filter: saturate(1.12) brightness(1.18) contrast(1.04);
+}
 @media (max-width: 900px) {
   .block-grid {
     grid-template-columns: 1fr;

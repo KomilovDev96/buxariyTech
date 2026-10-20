@@ -269,16 +269,21 @@ h1 em {
   border-radius: 48% 48% 0 0;
   overflow: hidden;
   background: #131211;
+  box-shadow:
+    0 0 34px rgba(212, 175, 124, 0.42),
+    0 0 92px rgba(139, 111, 71, 0.22);
 }
 .arch-photo img {
   object-fit: cover;
   object-position: 50% 35%;
-  filter: saturate(0.7) brightness(0.78);
+  filter: saturate(1.12) brightness(1.18) contrast(1.04);
 }
 .photo-shade {
   position: absolute;
   inset: 0;
-  background: linear-gradient(0deg, #0d0d0d 0%, transparent 53%);
+  background:
+    linear-gradient(0deg, rgba(13, 13, 13, 0.78) 0%, transparent 53%),
+    radial-gradient(circle at 72% 38%, rgba(212, 175, 124, 0.2), transparent 48%);
 }
 .heritage-caption {
   position: absolute;
@@ -924,7 +929,7 @@ h2 {
 .story-image img {
   object-fit: cover;
   object-position: 50% 32%;
-  filter: brightness(0.6) saturate(0.5);
+  filter: brightness(0.92) saturate(0.82) contrast(1.02);
 }
 .story-image span {
   position: absolute;
