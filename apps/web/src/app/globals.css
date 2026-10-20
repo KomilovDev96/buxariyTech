@@ -7,13 +7,13 @@
   --font-heading: 'Montserrat', sans-serif;
 }
 :root {
-  color-scheme: dark;
-  --bg: #0d0d0d;
-  --surface: #151515;
-  --border: #2b2925;
-  --gold: #d4af7c;
-  --muted: #a5a19a;
-  --text: #f5efe6;
+  color-scheme: light;
+  --bg: #f7f3ec;
+  --surface: #fffdf8;
+  --border: #d9cdbb;
+  --gold: #a87935;
+  --muted: #6f685f;
+  --text: #211d18;
 }
 * {
   box-sizing: border-box;
@@ -584,6 +584,137 @@ h1 em {
   .hero-foot p {
     max-width: 280px;
   }
+}
+
+/* Light theme: the public site uses this palette by default. */
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+.header {
+  background: rgba(247, 243, 236, 0.94);
+  border-color: var(--border);
+  backdrop-filter: blur(16px);
+}
+.nav-links {
+  color: #5f574d;
+}
+.nav-actions option {
+  background: var(--surface);
+  color: var(--text);
+}
+.hero,
+.trust-bar,
+.section,
+.pricing,
+.footer {
+  color: var(--text);
+}
+.hero-description,
+.section-description,
+.muted,
+.footer-bottom,
+.footer-links {
+  color: var(--muted);
+}
+.problem-section,
+.portfolio-section,
+.solutions-section {
+  color: var(--text);
+  border-color: var(--border);
+}
+.problem-section {
+  background: #eee7dc;
+}
+.portfolio-section,
+.solutions-section {
+  background: linear-gradient(180deg, #fbf8f2, #f1eadf);
+}
+.service-card,
+.project-card,
+.team-card,
+.solution-card,
+.solution-launch,
+.contact-form,
+.pricing,
+.selected-solution,
+.empty-state {
+  background: var(--surface);
+  border-color: var(--border);
+  color: var(--text);
+  box-shadow: 0 16px 38px rgba(91, 67, 37, 0.07);
+}
+.solution-card:hover,
+.service-card:hover,
+.project-card:hover {
+  border-color: #b9955d;
+  box-shadow: 0 20px 45px rgba(91, 67, 37, 0.12);
+}
+.solution-card.selected,
+.selected-solution {
+  background: #f4ead9;
+  border-color: #b9955d;
+}
+.solution-filters button {
+  color: var(--muted);
+  border-color: var(--border);
+}
+.solution-filters button.active,
+.solution-filters button:hover {
+  color: #3b2a18;
+  background: #e6c38f;
+  border-color: #b9955d;
+}
+.solution-card p,
+.solution-card li,
+.solution-audience,
+.solution-description,
+.solution-workflow,
+.solution-outcome {
+  color: var(--muted);
+}
+input,
+select,
+textarea {
+  background: #fffdf9;
+  color: var(--text);
+  border-color: var(--border);
+}
+input::placeholder,
+textarea::placeholder {
+  color: #948879;
+}
+.contact-form label,
+.contact-form .optional {
+  color: var(--muted);
+}
+.story,
+.why-grid,
+.benefit-grid,
+.process-grid,
+.complexity-flow {
+  color: var(--text);
+}
+.cta {
+  border-color: #b9955d;
+  background: linear-gradient(135deg, #efe0c7, #fbf8f2);
+  color: var(--text);
+}
+.footer {
+  border-color: var(--border);
+}
+.system-chip,
+.heritage-caption,
+.visual-label,
+.visual-coordinate {
+  color: #f5efe6;
+}
+.hero-foot,
+.trust-bar {
+  border-color: var(--border);
+}
+.menu-toggle {
+  color: var(--text);
 }
 @media (prefers-reduced-motion: reduce) {
   html {
@@ -2303,3 +2434,30 @@ h2 {
     animation: none;
   }
 }
+
+/* Keep the light palette authoritative after component-specific styles. */
+body { background: var(--bg); color: var(--text); }
+.header { background: rgba(247, 243, 236, 0.94); border-color: var(--border); }
+.nav-links { color: #5f574d; }
+.nav-actions option { background: var(--surface); color: var(--text); }
+.hero, .trust-bar, .section, .pricing, .footer { color: var(--text); }
+.hero-description, .section-description, .muted, .footer-bottom, .footer-links { color: var(--muted); }
+.problem-section { background: #eee7dc; color: var(--text); border-color: var(--border); }
+.portfolio-section, .solutions-section { background: linear-gradient(180deg, #fbf8f2, #f1eadf); color: var(--text); border-color: var(--border); }
+.service-card, .project-card, .team-card, .solution-card, .solution-launch, .contact-form, .pricing, .selected-solution, .empty-state {
+  background: var(--surface); border-color: var(--border); color: var(--text); box-shadow: 0 16px 38px rgba(91, 67, 37, 0.07);
+}
+.solution-card:hover, .service-card:hover, .project-card:hover { border-color: #b9955d; box-shadow: 0 20px 45px rgba(91, 67, 37, 0.12); }
+.solution-card.selected, .selected-solution { background: #f4ead9; border-color: #b9955d; }
+.solution-filters button { color: var(--muted); border-color: var(--border); }
+.solution-filters button.active, .solution-filters button:hover { color: #3b2a18; background: #e6c38f; border-color: #b9955d; }
+.solution-card p, .solution-card li, .solution-audience, .solution-description, .solution-workflow, .solution-outcome { color: var(--muted); }
+input, select, textarea { background: #fffdf9; color: var(--text); border-color: var(--border); }
+input::placeholder, textarea::placeholder { color: #948879; }
+.contact-form label, .contact-form .optional { color: var(--muted); }
+.story, .why-grid, .benefit-grid, .process-grid, .complexity-flow { color: var(--text); }
+.cta { border-color: #b9955d; background: linear-gradient(135deg, #efe0c7, #fbf8f2); color: var(--text); }
+.footer { border-color: var(--border); }
+.system-chip, .heritage-caption, .visual-label, .visual-coordinate { color: #f5efe6; }
+.hero-foot, .trust-bar { border-color: var(--border); }
+.menu-toggle { color: var(--text); }
