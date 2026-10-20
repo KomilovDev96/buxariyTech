@@ -55,4 +55,4 @@ jobs:
           chmod 600 "$HOME/.ssh/deploy_key"
           ssh-keyscan -H "$DEPLOY_HOST" >> "$HOME/.ssh/known_hosts"
           ssh -i "$HOME/.ssh/deploy_key" -o IdentitiesOnly=yes "$DEPLOY_USER@$DEPLOY_HOST" \
-            'bash /opt/buhariy/scripts/deploy.sh'
+            'COMPOSE_PARALLEL_LIMIT=1 bash /opt/buhariy/scripts/deploy.sh'

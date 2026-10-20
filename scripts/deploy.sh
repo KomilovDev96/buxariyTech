@@ -17,7 +17,8 @@ cd "$APP_DIR"
 git fetch --depth=1 origin main
 git reset --hard origin/main
 
-docker compose --env-file .env.production -f docker-compose.prod.yml build --pull
+export COMPOSE_PARALLEL_LIMIT="${COMPOSE_PARALLEL_LIMIT:-1}"
+docker compose --env-file .env.production -f docker-compose.prod.yml build --pull api admin web
 docker compose --env-file .env.production -f docker-compose.prod.yml up -d postgres minio
 docker compose --env-file .env.production -f docker-compose.prod.yml run --rm api npm run db:migrate
 docker compose --env-file .env.production -f docker-compose.prod.yml up -d api admin web caddy
